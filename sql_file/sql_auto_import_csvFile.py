@@ -6,11 +6,11 @@ import time
 import pandas as pd
 
 #CSV파일경로                                (실사용시 변경필요)******************************
-ROOT_DIR='/dummy_data/032818/'
+ROOT_DIR='dummy_data/032818/'
 #CSV파일명                                  (실사용시 _J1_VIIRS_C2_result_korea추가필요)******************************
 CSV='_SUOMI_VIIRS_C2result_korea.csv'
 #테이블명
-TBLname='crdnttable'
+TBLname='CrdntTable'
 
                                             #실사용시 주석해제 및 더미값 제거******************************
 #스크립트 시작시간을 기준으로 timeStamp 로드
@@ -18,7 +18,8 @@ TBLname='crdnttable'
 #timeStamp=str(tm.tm_year)+'_'+str(tm.tm_mon)+'_'+str(tm.tm_mday)+'-'+str(tm.tm_hour)
 timeStamp='2022_3_28-18'
 
-pd.read_csv(ROOT_DIR+timeStamp+CSV)    
+pd.read_csv(ROOT_DIR+timeStamp+CSV,header=None)    
+
 # csv 파일을 불러와서 mysql의 capstondb-crdnttable의 각각의 colum에 저장.
 def insert_proc(root,fName,TBL):
     try:
