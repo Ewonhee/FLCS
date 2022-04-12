@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import scipy.spatial as sp
-from sklearn.cluster import KMeans
 import math
 
 def doit(df_,d):
+    plt.figure(figsize=(10,10))
     clu_id=0
     clu_buffer=[]
     df=df_.sort_values(['y'],ascending=True)
@@ -25,15 +25,14 @@ def doit(df_,d):
         data=df.loc[df.cluID==i]
         data=data.drop('cluID',axis=1).values
         if len(data)>2: 
-            #plt.scatter(data[:,1],data[:,0])
+            plt.scatter(data[:,1],data[:,0])
             hull=sp.ConvexHull(data)
             for simplex in hull.simplices:
-                plt.plot(data[simplex, 1], data[simplex, 0], 'k-')
-                
+                plt.plot(data[simplex, 1], data[simplex, 0], 'k-')            
     plt.show()            
 
 #분석대상    
-df=pd.read_csv('/home/sons/FLCS/datas/kml_csv_kor_only/2022_3_29-12_J1_VIIRS_C2_result_korea.csv')
+df=pd.read_csv('data/kml_csv_kor_only/2022_3_29-9_J1_VIIRS_C2_result_korea.csv')
 #발생화재수(가정임으로 수동력)
-d=0.016
+d=0.1
 doit(df,d)
