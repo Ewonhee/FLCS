@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import scipy.spatial as sp
 import math
-
+#폐기. kml_json_processer.py사용
 def doit(df_,d):
     plt.figure(figsize=(10,10))
     clu_id=0
