@@ -2,14 +2,13 @@
 #출력은 x,y로 구분되는 csv파일
 #데이터와 동일위치에 있어야함
 #mode True as Korea, False as Samchok
-
 import os
 import glob
 import concurrent.futures
 from bs4 import BeautifulSoup as bs
 import pandas as pd
-#######################################
-mode=False
+from multiprocessing import freeze_support
+mode=True
 #######################################
 def analysis(file):
     if os.path.isfile('proc/'+str(file[:-4])+'.csv')==False:
@@ -44,19 +43,20 @@ def analysis(file):
             print("proc/"+str(file[:-4])+"result_Samchok.csv Successfully Processed")
         else:
             print("proc/"+str(file[:-4])+"result_Samchok.csv Already Exist")
-
 #_______________________________________________________________________________  
 ##MAIN_start
-  
-if(os.path.isdir('proc/')==False):
-    os.makedirs('proc/')  
-            
-#멀티스레딩적용(cpu과부하에 유의)
-with concurrent.futures.ProcessPoolExecutor() as executor:
-    imported_files = glob.glob("*.kml")
-    executor.map(analysis, imported_files)
-
-#싱글스레드
-#imported_files = glob.glob("*.kml")
-#for file in imported_files:
-#    analysis(file)
+def __main__():
+    global mode
+    mode=False
+    if __name__=='__main__':
+        freeze_support()
+        if(os.path.isdir('proc/')==False):
+            os.makedirs('proc/')  
+        #멀티스레딩적용(cpu과부하에 유의)
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            imported_files = glob.glob("*.kml")
+            executor.map(analysis, imported_files)
+        #싱글스레드
+        #imported_files = glob.glob("*.kml")
+        #for file in imported_files:
+        #    analysis(file)
