@@ -9,6 +9,7 @@ import glob
 import concurrent.futures
 import gc
 from multiprocessing import freeze_support
+d,gdf=None,None
 
 def EPSGcvter(name):
     jsons=gpd.read_file(name)
@@ -53,17 +54,20 @@ def analysis(name):
     f.close()
     gc.collect(generation=2)       
 
-
-d=0.10
-gdf=gpd.read_file('data/korea_forest_map.shp').to_crs('epsg:4326')
-if(os.path.isdir('data/geojson/WGS84/')==False):
-    os.makedirs('data/geojson/WGS84/')  
-
-imported_files = glob.glob("data/kml_csv_kor_only/*.csv")
-for i in imported_files:
-    analysis(i)
-#if(os.path.isdir('data/geojson/UTMK/')==False):
-#    os.makedirs('data/geojson/UTMK/')  
-#with concurrent.futures.ProcessPoolExecutor() as executor:
-#    imported_files = glob.glob('data/geojson/WGS84/*.geojson')
-#    executor.map(EPSGcvter, imported_files)
+def __main__():
+    global d,gdf
+    if __name__=='__main__':
+        freeze_support()
+        d=0.10
+        gdf=gpd.read_file('data/korea_forest_map.shp').to_crs('epsg:4326')
+        if(os.path.isdir('data/geojson/WGS84/')==False):
+            os.makedirs('data/geojson/WGS84/')  
+        imported_files = glob.glob("data/kml_csv_kor_only/*.csv")
+        for i in imported_files:
+            analysis(i)
+        if(os.path.isdir('data/geojson/UTMK/')==False):
+            os.makedirs('data/geojson/UTMK/')  
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            imported_files = glob.glob('data/geojson/WGS84/*.geojson')
+            executor.map(EPSGcvter, imported_files)
+    

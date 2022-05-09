@@ -11,7 +11,6 @@ $(function () {
       $('.menu1').fadeIn();
   });
 
-
   $(".menu4_dateTime").hide();
   $(".menu4").click(function () {
       $(".menu4_dateTime").fadeToggle();

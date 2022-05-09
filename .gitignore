@@ -3,3 +3,6 @@
 *.shp
 *.dbf
 *.prj
+*.kml
+*.pyc
+*.pptx
