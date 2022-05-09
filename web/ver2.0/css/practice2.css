@@ -32,26 +32,34 @@ header {background:rgb(160, 28, 28);box-shadow: 1px 1px 15px 1px rgb(212, 209, 2
 header .logo_box{position:absolute; left:10px; top:10px; cursor:pointer;}
 header .logo_box img{width:75px;}
 #wrap header{width:100px; height:100%; position:fixed; left:0px; top:0px; z-index:11;}
-#wrap header div{width:100%; height:100%;} 
+#wrap header div{width:100%; height:100%;cursor: default;} 
 #wrap header div ul{width:100%; height:100%; display:flex; flex-direction:column; justify-content:center;}
 #wrap header ul ul{margin:70px 30px 0px 30px; position:relative;text-align: center;}
 #wrap header ul ul a{font-size:20px; font-weight:600; line-height:10px;}
-#wrap header ul ul p{font-size:8pt; font-family: 'Noto Sans KR', sans-serif;; font-weight:600; line-height:10px;color: #000000;}
+#wrap header ul ul p{font-size:8pt; font-family: 'Noto Sans KR', sans-serif;; font-weight:600; line-height:10px;color: #ffffff;}
 /*마우스 가져다 올리면 색 검은색으로 바뀌게 하고 싶음 */
 #wrap header ul ul:hover a,#wrap header ul ul .on p{color:#000000;} 
 #wrap header ul ul:hover:after,#wrap header ul ul.on:after{color:#000000;}
 
 #wrap .menu1 {cursor: pointer;}
 #wrap .menu1 .hide{display: none;}
+#wrap .menu1 p:hover {color: rgb(255, 255, 0);}
+/*취소 버튼
+#wrap .menu1 #btn1{color: skyblue; background-color: rgba(0,0,0,0);font-size: 10pt;border-radius: 5px;border: 1px solid skyblue;}
+#wrap .menu1 #btn1:hover{color: white;background-color: skyblue;}
+*/
 
 #wrap .menu2 {cursor: pointer;}
 #wrap .menu2 .hide{display: none;}
+#wrap .menu2 p:hover {color: rgb(255, 255, 0);}
 
 #wrap .menu3 {cursor: pointer;}
 #wrap .menu3 .hide{display: none;}
+#wrap .menu3 p:hover {color: rgb(255, 255, 0);}
 
 #wrap .menu4 {cursor: pointer;}
 #wrap .menu4 .hide{display: none;}
+#wrap .menu4 p:hover {color: rgb(255, 255, 0);}
 
 #wrap .menu1_dateTime{
   position: fixed;
