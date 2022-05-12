@@ -2,18 +2,34 @@
 $(function () {
   $(".menu1_dateTime").hide();
   $(".menu1").click(function () {
-      $(".menu1_dateTime").fadeToggle();
+      $(".menu1_dateTime").show();
+      /*
+      $("#btn1").click(function () {
+        $(".menu1_dateTime").hide();
+      });
+      */
   });
   
   // 외부 클릭 시 좌측 사이드 메뉴 숨기기
-  $('.overlay').on('click', function () {
+  $('.wrap').on('click', function () {
       $('.menu1_dateTime').fadeOut();
       $('.menu1').fadeIn();
   });
 
+  $('.time').timepicker({
+    datepicker:false,
+    allowTimes:[
+      '00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'
+    ],
+    language : 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
+    pickTime : false, // 사용자로부터 시간 선택을 허용하려면 true를 설정하거나 pickTime 옵션을 생략한다.
+    defalutDate : new Date() // 기본값으로 오늘 날짜를 입력한다. 기본값을 해제하려면 defaultDate 옵션을 생략한다.
+  });
+  
+
   $(".menu4_dateTime").hide();
   $(".menu4").click(function () {
-      $(".menu4_dateTime").fadeToggle();
+      $(".menu4_dateTime").toggle();
   });
   // 외부 클릭 시 좌측 사이드 메뉴 숨기기
   $('.overlay').on('click', function () {
