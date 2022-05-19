@@ -1,0 +1,41 @@
+@charset "utf-8";
+@import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, button, abbr, acronym, address, code, del, 
+dfn, em, img, strong, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, 
+td, hr{margin:0;padding:0;font-size:100%;box-sizing: border-box;}
+body{height:100%;min-height:100%;font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#737373;line-height:1.5;background:url(../images/rainbowbg.jpg) repeat;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal}
+ol, ul, li {list-style:none}
+table {width:100%; border-collapse:collapse;border-spacing:0}
+form, fieldset, iframe {display:block;border:0}
+img, button {border:0 none;vertical-align:top;}
+hr {height:0; display:none}
+i, em, address{font-style:normal}
+label, button{cursor:pointer}
+blockquote, q {quotes:none}
+caption, legend {overflow:hidden;visibility:hidden;position:absolute;width:0;height:0;padding:0;margin:0;font-size:0;text-indent:-100%;white-space:nowrap;z-index:-1}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption {display:block;box-sizing: border-box;}
+input, textarea, select, button {font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#919090;line-height:1.5;letter-spacing:0;vertical-align:middle; border:none;}
+input, textarea {margin:0;padding:0;  background:none; box-sizing:border-box;}
+textarea {resize:none}
+a {color:#919090;text-decoration:none}
+a:link, a:visited {text-decoration:none}
+a:hover {text-decoration:none}
+.blind{display: none;overflow: hidden;position: absolute;width: 0;height: 0;padding: 0;margin: 0; font-size: 0;line-height: 0; text-indent: -9999em;visibility: hidden;outline: none;z-index: -1;}
+html,body{overflow:hidden;height:100%;}
+
+/* 메뉴 설정 */
+#wrap{width:100%; height:100%; padding-left:180px;}
+
+header {background:rgb(255, 255, 255);box-shadow: 1px 1px 15px 1px rgb(212, 209, 209); z-index: 2;}
+header .logo_box{position:absolute; left:15px; top:10px; cursor:pointer;}
+header .logo_box img{width:150px;}
+#wrap header{width:180px; height:100%; position:fixed; left:0px; top:0px; z-index:11;}
+#wrap header nav{width:100%; height:70%;display:flex; flex-direction:column; justify-content:center;} 
+#wrap header nav .btn1{display:block;width:180px;line-height:50px;text-align:center;background-color:rgb(158, 20, 66);color:rgb(255,255,255);}
+#wrap header nav .btn2{display:block;width:180px;line-height:50px;text-align:center;background-color:rgb(158, 20, 66);color:rgb(255,255,255);}
+#wrap header nav .date{padding-top: 200px;background-color:rgb(193, 144, 160, 0.412);}
+
+/* 지도 크기 */
+#wrap map{width:100%-20px;height:580px;z-index:1}
