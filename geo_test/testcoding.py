@@ -1,7 +1,7 @@
 import json
 import googlemaps
 # api key
-gmaps = googlemaps.Client(key='AIzaSyAcxJTWmScJFuBBsylcl6k4T0_mZST0yto')
+gmaps = googlemaps.Client(key='mykey')
 # 좌표입력
 reverse_geocode_result = gmaps.reverse_geocode((36.77519, 126.63483), language='ko')
 #print(reverse_geocode_result)
