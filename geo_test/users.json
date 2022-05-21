@@ -1,0 +1,559 @@
+[
+    {
+        "address_components": [
+            {
+                "long_name": "１４−３",
+                "short_name": "１４−３",
+                "types": [
+                    "premise"
+                ]
+            },
+            {
+                "long_name": "원평리",
+                "short_name": "원평리",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_3"
+                ]
+            },
+            {
+                "long_name": "운산면",
+                "short_name": "운산면",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_2"
+                ]
+            },
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "356-830",
+                "short_name": "356-830",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도 서산시 운산면 원평리 14-3",
+        "geometry": {
+            "location": {
+                "lat": 36.77507689999999,
+                "lng": 126.6349143
+            },
+            "location_type": "ROOFTOP",
+            "viewport": {
+                "northeast": {
+                    "lat": 36.7764258802915,
+                    "lng": 126.6362632802915
+                },
+                "southwest": {
+                    "lat": 36.7737279197085,
+                    "lng": 126.6335653197085
+                }
+            }
+        },
+        "place_id": "ChIJR1o4ykb2ejURMz08qwrMO4Y",
+        "plus_code": {
+            "compound_code": "QJGM+2X 대한민국 충청남도 서산시",
+            "global_code": "8Q88QJGM+2X"
+        },
+        "types": [
+            "street_address"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "QJGM+3W",
+                "short_name": "QJGM+3W",
+                "types": [
+                    "plus_code"
+                ]
+            },
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            }
+        ],
+        "formatted_address": "QJGM+3W 대한민국 충청남도 서산시",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 36.77525,
+                    "lng": 126.634875
+                },
+                "southwest": {
+                    "lat": 36.775125,
+                    "lng": 126.63475
+                }
+            },
+            "location": {
+                "lat": 36.77518999999999,
+                "lng": 126.63483
+            },
+            "location_type": "GEOMETRIC_CENTER",
+            "viewport": {
+                "northeast": {
+                    "lat": 36.77653648029149,
+                    "lng": 126.6361614802915
+                },
+                "southwest": {
+                    "lat": 36.77383851970849,
+                    "lng": 126.6334635197085
+                }
+            }
+        },
+        "place_id": "GhIJ1hcJbTljQkARQiECDqGoX0A",
+        "plus_code": {
+            "compound_code": "QJGM+3W 대한민국 충청남도 서산시",
+            "global_code": "8Q88QJGM+3W"
+        },
+        "types": [
+            "plus_code"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "원평리",
+                "short_name": "원평리",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_3"
+                ]
+            },
+            {
+                "long_name": "운산면",
+                "short_name": "운산면",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_2"
+                ]
+            },
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "356-830",
+                "short_name": "356-830",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도 서산시 운산면 원평리",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 36.77682220000001,
+                    "lng": 126.6390062
+                },
+                "southwest": {
+                    "lat": 36.7301034,
+                    "lng": 126.6068411
+                }
+            },
+            "location": {
+                "lat": 36.7576469,
+                "lng": 126.6245273
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 36.77682220000001,
+                    "lng": 126.6390062
+                },
+                "southwest": {
+                    "lat": 36.7301034,
+                    "lng": 126.6068411
+                }
+            }
+        },
+        "place_id": "ChIJZd9Y_-H1ejURZGkUXOki-Is",
+        "types": [
+            "political",
+            "sublocality",
+            "sublocality_level_3"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "356-835",
+                "short_name": "356-835",
+                "types": [
+                    "postal_code"
+                ]
+            },
+            {
+                "long_name": "운산면",
+                "short_name": "운산면",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_2"
+                ]
+            },
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도 서산시 운산면",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 36.7977492,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.7301034,
+                    "lng": 126.5894823
+                }
+            },
+            "location": {
+                "lat": 36.7688237,
+                "lng": 126.6255869
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 36.7977492,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.7301034,
+                    "lng": 126.5894823
+                }
+            }
+        },
+        "place_id": "ChIJZd9Y_-H1ejUR746dqCQzKrk",
+        "types": [
+            "postal_code"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "운산면",
+                "short_name": "운산면",
+                "types": [
+                    "political",
+                    "sublocality",
+                    "sublocality_level_2"
+                ]
+            },
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "356-830",
+                "short_name": "356-830",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도 서산시 운산면",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 36.8381201,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.7237121,
+                    "lng": 126.5239662
+                }
+            },
+            "location": {
+                "lat": 36.8106976,
+                "lng": 126.5806326
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 36.8381201,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.7237121,
+                    "lng": 126.5239662
+                }
+            }
+        },
+        "place_id": "ChIJxxFXdr9YejURkud-to_P1Rs",
+        "types": [
+            "political",
+            "sublocality",
+            "sublocality_level_2"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "서산시",
+                "short_name": "서산시",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도 서산시",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 37.0572003,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.6028644,
+                    "lng": 126.2999902
+                }
+            },
+            "location": {
+                "lat": 36.7844993,
+                "lng": 126.4503169
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 37.0572003,
+                    "lng": 126.6539923
+                },
+                "southwest": {
+                    "lat": 36.6028644,
+                    "lng": 126.2999902
+                }
+            }
+        },
+        "place_id": "ChIJswpwSZtbejUR6U6X3CLP3hA",
+        "types": [
+            "locality",
+            "political"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "충청남도",
+                "short_name": "충청남도",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국 충청남도",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 37.0940358,
+                    "lng": 127.6396353
+                },
+                "southwest": {
+                    "lat": 35.9806573,
+                    "lng": 125.9480213
+                }
+            },
+            "location": {
+                "lat": 36.5184,
+                "lng": 126.8
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 37.0940358,
+                    "lng": 127.6396353
+                },
+                "southwest": {
+                    "lat": 35.9806573,
+                    "lng": 125.9480213
+                }
+            }
+        },
+        "place_id": "ChIJ_6RwHSd9ejURRWTn5Ge-sho",
+        "types": [
+            "administrative_area_level_1",
+            "political"
+        ]
+    },
+    {
+        "address_components": [
+            {
+                "long_name": "대한민국",
+                "short_name": "KR",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            }
+        ],
+        "formatted_address": "대한민국",
+        "geometry": {
+            "bounds": {
+                "northeast": {
+                    "lat": 38.63400000000001,
+                    "lng": 131.1603
+                },
+                "southwest": {
+                    "lat": 33.0041,
+                    "lng": 124.5863
+                }
+            },
+            "location": {
+                "lat": 35.907757,
+                "lng": 127.766922
+            },
+            "location_type": "APPROXIMATE",
+            "viewport": {
+                "northeast": {
+                    "lat": 38.63400000000001,
+                    "lng": 131.1603
+                },
+                "southwest": {
+                    "lat": 33.0041,
+                    "lng": 124.5863
+                }
+            }
+        },
+        "place_id": "ChIJm7oRy-tVZDURS9uIugCbJJE",
+        "types": [
+            "country",
+            "political"
+        ]
+    }
+]
