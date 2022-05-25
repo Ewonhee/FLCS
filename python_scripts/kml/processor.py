@@ -12,7 +12,8 @@ from sklearn.cluster import DBSCAN
 import json
 import pymysql
 import matplotlib.pyplot as plt
-
+import getFcst
+from shapely.geometry import Polygon
 #KML파일분석기 
 #최상위디렉터리에서 수행되어야함
 #######################################
@@ -23,10 +24,10 @@ import matplotlib.pyplot as plt
     #GeoJSON_cvtr: concurrnt.futures로 병렬처리 오류발생(실사용시 문제 없음)
 #######################################
 # P  A  N  E  L #
-d=0.10                                                                                           #d-value
+d=0.1                                                                                           #d-value
 base="test"                                                                                    #베이스 폴더 지정[test, data]
 mp=True                                                                                       #멀티프로세싱 사용여부
-fig_evidence=True                                                                         #증거용플롯저장
+fig_evidence=False                                                                         #증거용플롯저장
 db_host='localhost'                                                                        #DB호스트
 db_user='root'                                                                                #DB유저
 db_pw='1234'                                                                                 #DBPW
@@ -67,6 +68,7 @@ def CSV_cvtr(file):
         res.to_csv(base+'/kml_csv_kor_only/'+str(file.split('/')[1].split('\\')[1][:-4])+'result_korea.csv',index=False)
     else:
         print(base+'/kml_csv_kor_only/'+str(file.split('/')[1].split('\\')[1][:-4])+"result_korea.csv Already Exist")
+
 #_______________________________________________________________________________  
 def GeoJSON_cvtr(file,fig):
     addr=str(base+'/geojson/WGS84/'+str(file.split('/')[1].split('\\')[1][:-4]))
@@ -75,46 +77,51 @@ def GeoJSON_cvtr(file,fig):
         df=pd.read_csv(str(file))
         df=df[df['x']<39]
         points=gpd.GeoDataFrame(df,geometry=gpd.points_from_xy(df.y,df.x),crs='epsg:4326')
-        joined_points=gpd.sjoin(points,gdf)
+        joined_points=gpd.sjoin(points,gdf) #실사용용
+        #joined_points=points #테스트용
         df_joined_points=pd.DataFrame()
         df_joined_points['x']=joined_points['y']
         df_joined_points['y']=joined_points['x']
+        dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_
+        fets=[]
         # create model and prediction
         try:
             dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_
             df_joined_points=df_joined_points.assign(cluID=dbs)
         except:
             print(str(file)+"DBSCAN경고: smaple이 minsamples보다 작습니다. 비어있는 GeoJSON파일을 생성합니다")
-            out='{"type": "Point","coordinates": [0, 0]}'
+            fets.append('{"type": "Point","coordinates": [0, 0]}')
         else:    
             dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_        
             df_joined_points=df_joined_points.assign(cluID=dbs)
-            exportJSON=''
             for i in range(len(dbs)):
                     data=df_joined_points.loc[df_joined_points.cluID==i]
                     data=data.drop('cluID',axis=1)
                     if len(data)>2:  
                         data_=np.array(data)
                         hull=sp.ConvexHull(data_)
-                        cnt=1
                         #증거 플롯 저장
                         if(fig==True):
                             for simplex in hull.simplices:
                                 plt.plot(data_[simplex, 0], data_[simplex, 1], 'k-')                        
-                        exportJSON=exportJSON+'['
+                        li=[]
                         for i in hull.vertices:
-                            exportJSON=exportJSON+str('['+str(hull.points[i,0])+','+str(hull.points[i,1])+'],')
-                            if(cnt<len(hull.vertices)):
-                                cnt=cnt+1
-                            else:
-                                exportJSON=exportJSON+str('['+str(hull.points[hull.vertices[0],0])+','+str(hull.points[hull.vertices[0],1])+']],')
-            out='{"type": "MultiPolygon","coordinates": [['+exportJSON[:-1]+']]}'
+                            li.append([hull.points[i,0],hull.points[i,1]])
+                        li.append(li[0])
+                        print(Polygon(li).area)###############################산불의 규모 구할 수 있음
+                        ######근?데 단위를 모름 근?데 일단 넣음
+                        prop_addr,prop_wdir,prop_wspd=getFcst.cord(Polygon(li).centroid)
+                        prop={"Description": str(prop_addr)+"의 산불 상황입니다<br> 풍향: "+str(prop_wdir) +", 풍속: "+str(prop_wspd)+", 규모: "+str(round(Polygon(li).area,4))}
+                        geom={ "type": "Polygon","coordinates": [li]}
+                        fet={"type": "Feature","geometry":geom,"properties": prop}
+                        fets.append(fet) 
             if(fig==True):
                 plt.savefig(addr+'.jpg')
                 plt.close()
         finally:
-            f=open(addr+'.geojson','w')
-            f.write(out)
+            dic={"type": "FeatureCollection","features":fets}
+            f=open(addr+'.geojson', 'w', encoding='UTF-8-sig')
+            f.write(json.dumps(dic, ensure_ascii=False))
             f.close()
             gc.collect(generation=2)
 #_______________________________________________________________________________  
@@ -185,8 +192,8 @@ def DB_insert(file_name):
 #######################################
 if __name__=='__main__':
     freeze_support()
-    #kml을 한국좌표 추출해 csv변환
-    #data/kml/*.kml -> data/kml_csv_kor_only/*.csv
+#    #kml을 한국좌표 추출해 csv변환
+#    #data/kml/*.kml -> data/kml_csv_kor_only/*.csv
     with concurrent.futures.ProcessPoolExecutor() as executor:
         imported_files = glob.glob(base+"/kml/*.kml")
         if mp==False:
@@ -197,7 +204,7 @@ if __name__=='__main__':
     
     #데이터 필터링 처리해서 WGS84좌표로 GeoJSON 변환
     #data/kml_csv_kor_only/*.csv -> data/geojson/WGS84/*.geojson
-    gdf=gpd.read_file(gdfloc).to_crs('epsg:4326') #셰이프파일 위치
+    #gdf=gpd.read_file(gdfloc).to_crs('epsg:4326') #셰이프파일 위치
     print('gdf load Done')
     imported_files = glob.glob(base+"/kml_csv_kor_only/*result_korea.csv")
     for file in imported_files:
@@ -213,9 +220,9 @@ if __name__=='__main__':
         else:    
             executor.map(EPSG_cvtr, imported_files)
     print('EPSG_cvtr Done')
-    
-    #DB에 자료 삽입
-    #data/geojson/WGS84/*.geojson -> DataBase    
+#    
+#    #DB에 자료 삽입
+#    #data/geojson/WGS84/*.geojson -> DataBase    
     with concurrent.futures.ProcessPoolExecutor() as executor:
         imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
         if mp==False:
