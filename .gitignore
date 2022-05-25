@@ -7,3 +7,5 @@
 *.pyc
 *.pptx
 test/
+*.csv
+*.geojson
