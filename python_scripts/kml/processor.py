@@ -130,15 +130,7 @@ def EPSG_cvtr(file):
         jsons=gpd.read_file(file)
         jsons=jsons.to_crs('epsg:5179')
         jsons.to_file(base+'/geojson/UTMK/'+str(file.split('/')[2].split('\\')[1].split('.')[0])+'UTMK.geojson', driver='GeoJSON')
-#_______________________________________________________________________________  
-def insert_proc(coor, TBL, coorID):
-    sql = "insert into " + str(TBL) + "(ID, crdnt_X, crdnt_Y, DataCrawlingTime) value (%s, %s, %s, \""+ insert_time + "\")"
-    val = (coorID, coor[0], coor[1])
-    curs.execute(sql, val)
-    print(sql)
-    conn.commit()
-    return
-#_______________________________________________________________________________    
+#_______________________________________________________________________________      
 def DB_insert(file_name):
     if Dup_pass(file_name)==True:
         global conn, curs, insert_time,db_host,db_user,db_pw,db_name,TBLname
@@ -156,34 +148,20 @@ def DB_insert(file_name):
         except:
             print("예외2")
             exit()
-        #json_loads로 불러온 데이터의 coordinates를 불러오면
-        #coor[0]은 해당 좌표 전체
-        #coor[0][i]은 해당 좌표 전체의 i번째 좌표
-        #coor[0][i][j]는 해당 좌표 전체의 i번째 j좌표 (x, y) 각각에 접근가능
+
         dbinsert_num = 0
+        sql = "INSERT IGNORE INTO timetable VALUE (\"" + insert_time + "\")"
+        curs.execute(sql)
+        conn.commit()
+
         for i in range(len(json_data["features"])):
             coor = (json_data["features"][i]["geometry"]["coordinates"])
-            prop = (json_data["features"][i]["properties"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
-            for k in range(len(coor[0])):
-                print(coor[0][k])
-                print(TBLname)
-                print(i)
-                print("\n")
-                dbinsert_num+=1
-                print("db 삽입 시도 횟수 : " + str(dbinsert_num))
-                insert_proc(coor[0][k], TBLname, i)
-        #select_sql = "select * from " + TBLname
-        select_sql = "select * from crdnttable"
-        curs.execute(select_sql)
-        result = curs.fetchall()
-        print(result)
-        # coor = (json_data["features"][0]["geometry"]["coordinates"])
-        # with open('test.csv', 'w', newline='') as f:
-        #     for i in range(len(coor[0])):
-        #         for j in range(len(coor[0][i])):
-        #             writer = csv.writer(f)
-        #             writer.writerow(coor[0][i][j])
-        #insert_proc(ROOT_DIR, CSV, TBLname)
+            prop = (json_data["features"][i]["properties"]["Description"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
+            dbinsert_num += 1
+            sql = "INSERT INTO crdnttable(Properties, Coordinates, DataCrawlingTime, prop_ID) value(\"" + prop + "\", \""+ coor +"\", \""+ insert_time +"\"," + str(i) +")"
+            curs.execute(sql)
+            conn.commit()
+
         file.close()
         conn.close()
         exit()
