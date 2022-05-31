@@ -25,7 +25,7 @@ from shapely.geometry import Polygon
 #######################################
 # P  A  N  E  L #
 d=0.1                                                                                           #d-value
-base="test"                                                                                    #베이스 폴더 지정[test, data]
+base="data"                                                                                    #베이스 폴더 지정[test, data]
 mp=True                                                                                       #멀티프로세싱 사용여부
 fig_evidence=False                                                                         #증거용플롯저장
 db_host='localhost'                                                                        #DB호스트
@@ -82,7 +82,6 @@ def GeoJSON_cvtr(file,fig):
         df_joined_points=pd.DataFrame()
         df_joined_points['x']=joined_points['y']
         df_joined_points['y']=joined_points['x']
-        dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_
         fets=[]
         # create model and prediction
         try:
@@ -110,8 +109,16 @@ def GeoJSON_cvtr(file,fig):
                         li.append(li[0])
                         print(Polygon(li).area)###############################산불의 규모 구할 수 있음
                         ######근?데 단위를 모름 근?데 일단 넣음
-                        prop_addr,prop_wdir,prop_wspd=getFcst.cord(Polygon(li).centroid)
-                        prop={"Description": str(prop_addr)+"의 산불 상황입니다<br> 풍향: "+str(prop_wdir) +", 풍속: "+str(prop_wspd)+", 규모: "+str(round(Polygon(li).area,4))}
+                        prop_addr,prop_wdir,prop_wspd=getFcst.cord(Polygon(li).centroid)                        
+                        prop={"Description":( 
+                        "<div style='font-family: gothic, arial, sans-serif;font-size: 15px; font-weight: bold; color:red; margin-bottom: 5px;'>"+str(prop_addr) +"</div><hr/>"+
+                        "<div style='font-family: gothic, arial, sans-serif;font-size:15px; font-weight: bold; color:#17002e;'>"+
+                            "<table>"+
+                                "<tr><td>풍향</td><td>"+str(prop_wdir) +"</td></tr>"+
+                                "<tr><td>풍속</td><td>"+str(prop_wspd)+"m/s</td></tr>"+
+                                "<tr><td>규모</td><td>"+str(round(Polygon(li).area,4))+"</td></tr>"+
+                            "</table>"+
+                        "</div>")}
                         geom={ "type": "Polygon","coordinates": [li]}
                         fet={"type": "Feature","geometry":geom,"properties": prop}
                         fets.append(fet) 
@@ -131,40 +138,41 @@ def EPSG_cvtr(file):
         jsons=jsons.to_crs('epsg:5179')
         jsons.to_file(base+'/geojson/UTMK/'+str(file.split('/')[2].split('\\')[1].split('.')[0])+'UTMK.geojson', driver='GeoJSON')
 #_______________________________________________________________________________      
-def DB_insert(file_name):
-    if Dup_pass(file_name)==True:
-        global conn, curs, insert_time,db_host,db_user,db_pw,db_name,TBLname
-        insert_time=file_name.split('/')[2].split('\\')[1].replace("-", " 0").replace("_", "-").split('-')
-        insert_time = "-".join(insert_time[0:3])
-        print(insert_time)
-        TBLname='crdnttable'
-        with open(file_name, "r", encoding="utf8") as file:
-            contents = file.read()
-            json_data = json.loads(contents)
-        try:
-            # 접속 정보 설정 pw는 임의로 설정됨
-            conn = pymysql.connect(host=db_host, user=db_user, password=db_pw, db=db_name, charset='utf8')
-            curs = conn.cursor()
-        except:
-            print("예외2")
-            exit()
+#def DB_insert(file_name):
+#    if Dup_pass(file_name)==True:
+#        global conn, curs, insert_time,db_host,db_user,db_pw,db_name,TBLname
+#        insert_time=file_name.split('/')[2].split('\\')[1].replace("-", " 0").replace("_", "-").split('-')
+#        insert_time = "-".join(insert_time[0:3])
+#        print(insert_time)
+#        TBLname='crdnttable'
+#        with open(file_name, "r", encoding="utf8") as file:
+#            contents = file.read()
+#            json_data = json.loads(contents)
+#        try:
+#            # 접속 정보 설정 pw는 임의로 설정됨
+#            conn = pymysql.connect(host=db_host, user=db_user, password=db_pw, db=db_name, charset='utf8')
+#            curs = conn.cursor()
+#        except:
+#            print("예외2")
+#            exit()
+#
+#        dbinsert_num = 0
+#        sql = "INSERT IGNORE INTO timetable VALUE (\"" + insert_time + "\")"
+#        curs.execute(sql)
+#        conn.commit()
+#
+#        for i in range(len(json_data["features"])):
+#            coor = (json_data["features"][i]["geometry"]["coordinates"])
+#            prop = (json_data["features"][i]["properties"]["Description"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
+#            dbinsert_num += 1
+#            sql = "INSERT INTO crdnttable(Properties, Coordinates, DataCrawlingTime, prop_ID) value(\"" + prop + "\", \""+ coor +"\", \""+ insert_time +"\"," + str(i) +")"
+#            curs.execute(sql)
+#            conn.commit()
+#
+#        file.close()
+#        conn.close()
+#        exit()
 
-        dbinsert_num = 0
-        sql = "INSERT IGNORE INTO timetable VALUE (\"" + insert_time + "\")"
-        curs.execute(sql)
-        conn.commit()
-
-        for i in range(len(json_data["features"])):
-            coor = (json_data["features"][i]["geometry"]["coordinates"])
-            prop = (json_data["features"][i]["properties"]["Description"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
-            dbinsert_num += 1
-            sql = "INSERT INTO crdnttable(Properties, Coordinates, DataCrawlingTime, prop_ID) value(\"" + prop + "\", \""+ coor +"\", \""+ insert_time +"\"," + str(i) +")"
-            curs.execute(sql)
-            conn.commit()
-
-        file.close()
-        conn.close()
-        exit()
 #_______________________________________________________________________________    
 
 #######################################
@@ -182,7 +190,7 @@ if __name__=='__main__':
     
     #데이터 필터링 처리해서 WGS84좌표로 GeoJSON 변환
     #data/kml_csv_kor_only/*.csv -> data/geojson/WGS84/*.geojson
-    #gdf=gpd.read_file(gdfloc).to_crs('epsg:4326') #셰이프파일 위치
+    gdf=gpd.read_file(gdfloc).to_crs('epsg:4326') #셰이프파일 위치
     print('gdf load Done')
     imported_files = glob.glob(base+"/kml_csv_kor_only/*result_korea.csv")
     for file in imported_files:
@@ -201,11 +209,11 @@ if __name__=='__main__':
 #    
 #    #DB에 자료 삽입
 #    #data/geojson/WGS84/*.geojson -> DataBase    
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
-        if mp==False:
-            map(DB_insert, imported_files)
-        else:    
-            executor.map(DB_insert, imported_files)
-    print('DB_insert Done')    
+    #with concurrent.futures.ProcessPoolExecutor() as executor:
+    #    imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
+    #    if mp==False:
+    #        map(DB_insert, imported_files)
+    #    else:    
+    #        executor.map(DB_insert, imported_files)
+    #print('DB_insert Done')    
 ######################################            
