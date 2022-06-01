@@ -138,40 +138,40 @@ def EPSG_cvtr(file):
         jsons=jsons.to_crs('epsg:5179')
         jsons.to_file(base+'/geojson/UTMK/'+str(file.split('/')[2].split('\\')[1].split('.')[0])+'UTMK.geojson', driver='GeoJSON')
 #_______________________________________________________________________________      
-#def DB_insert(file_name):
-#    if Dup_pass(file_name)==True:
-#        global conn, curs, insert_time,db_host,db_user,db_pw,db_name,TBLname
-#        insert_time=file_name.split('/')[2].split('\\')[1].replace("-", " 0").replace("_", "-").split('-')
-#        insert_time = "-".join(insert_time[0:3])
-#        print(insert_time)
-#        TBLname='crdnttable'
-#        with open(file_name, "r", encoding="utf8") as file:
-#            contents = file.read()
-#            json_data = json.loads(contents)
-#        try:
-#            # 접속 정보 설정 pw는 임의로 설정됨
-#            conn = pymysql.connect(host=db_host, user=db_user, password=db_pw, db=db_name, charset='utf8')
-#            curs = conn.cursor()
-#        except:
-#            print("예외2")
-#            exit()
-#
-#        dbinsert_num = 0
-#        sql = "INSERT IGNORE INTO timetable VALUE (\"" + insert_time + "\")"
-#        curs.execute(sql)
-#        conn.commit()
-#
-#        for i in range(len(json_data["features"])):
-#            coor = (json_data["features"][i]["geometry"]["coordinates"])
-#            prop = (json_data["features"][i]["properties"]["Description"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
-#            dbinsert_num += 1
-#            sql = "INSERT INTO crdnttable(Properties, Coordinates, DataCrawlingTime, prop_ID) value(\"" + prop + "\", \""+ coor +"\", \""+ insert_time +"\"," + str(i) +")"
-#            curs.execute(sql)
-#            conn.commit()
-#
-#        file.close()
-#        conn.close()
-#        exit()
+def DB_insert(file_name):
+    if Dup_pass(file_name)==True:
+        global conn, curs, insert_time,db_host,db_user,db_pw,db_name,TBLname
+        insert_time=file_name.split('/')[2].split('\\')[1].replace("-", " 0").replace("_", "-").split('-')
+        insert_time = "-".join(insert_time[0:3])
+        print(insert_time)
+        TBLname='crdnttable'
+        with open(file_name, "r", encoding="utf8") as file:
+            contents = file.read()
+            json_data = json.loads(contents)
+        try:
+            # 접속 정보 설정 pw는 임의로 설정됨
+            conn = pymysql.connect(host=db_host, user=db_user, password=db_pw, db=db_name, charset='utf8')
+            curs = conn.cursor()
+        except:
+            print("예외2")
+            exit()
+
+        dbinsert_num = 0
+        sql = "INSERT IGNORE INTO timetable VALUE (\"" + insert_time + "\")"
+        curs.execute(sql)
+        conn.commit()
+
+        for i in range(len(json_data["features"])):
+            coor = (json_data["features"][i]["geometry"]["coordinates"])
+            prop = (json_data["features"][i]["properties"]["Description"]) #아래에서 출력하지 않는 것 (공유할 때 생략)
+            dbinsert_num += 1
+            sql = "INSERT INTO crdnttable(Properties, Coordinates, DataCrawlingTime, prop_ID) value(\"" + prop + "\", \""+ coor +"\", \""+ insert_time +"\"," + str(i) +")"
+            curs.execute(sql)
+            conn.commit()
+
+        file.close()
+        conn.close()
+        exit()
 
 #_______________________________________________________________________________    
 
@@ -209,11 +209,11 @@ if __name__=='__main__':
 #    
 #    #DB에 자료 삽입
 #    #data/geojson/WGS84/*.geojson -> DataBase    
-    #with concurrent.futures.ProcessPoolExecutor() as executor:
-    #    imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
-    #    if mp==False:
-    #        map(DB_insert, imported_files)
-    #    else:    
-    #        executor.map(DB_insert, imported_files)
-    #print('DB_insert Done')    
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
+        if mp==False:
+            map(DB_insert, imported_files)
+        else:    
+            executor.map(DB_insert, imported_files)
+    print('DB_insert Done')    
 ######################################            
