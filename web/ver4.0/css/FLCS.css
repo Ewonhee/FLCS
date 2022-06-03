@@ -1,0 +1,204 @@
+@charset "utf-8";
+@import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
+@import url("practice2.css") only screen and (min-width:200px) and (max-width:480px);
+@media only screen and (max-width: 767px) and (max-width:480px){/*모바일*/}
+/*@media only screen and (min-width:200px) and (max-width:480px) {css속성}*/
+@media (min-width: 768px) and (max-width: 991px) {
+   /* 테블릿 세로*/
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* 테블릿 가로*/
+}
+
+@media (min-width: 1200px) {
+    /* 데스크탑 일반*/
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, button, abbr, acronym, address, code, del, 
+dfn, em, img, strong, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, 
+td, hr{margin:0;padding:0;font-size:100%;box-sizing: border-box;}
+body{height:100%;min-height:100%;font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#737373;line-height:1.5;background-color: #ffffff repeat;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal}
+ol, ul, li {list-style:none}
+table {width:100%; border-collapse:collapse;border-spacing:0}
+form, fieldset, iframe {display:block;border:0}
+img, button {border:0 none;vertical-align:top;}
+hr {width: 300px;border-bottom: 0px;text-align: left;margin-left: 0px;}
+i, em, address{font-style:normal}
+label, button{cursor:pointer}
+blockquote, q {quotes:none}
+caption, legend {overflow:hidden;visibility:hidden;position:absolute;width:0;height:0;padding:0;margin:0;font-size:0;text-indent:-100%;white-space:nowrap;z-index:-1}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption {display:block;box-sizing: border-box;}
+input, textarea, select, button {font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#919090;line-height:1.5;letter-spacing:0;vertical-align:middle; border:none;}
+input, textarea {margin:0;padding:0;  background:none; box-sizing:border-box;}
+textarea {resize:none}
+a {color:#919090;text-decoration:none}
+a:link, a:visited {text-decoration:none}
+a:hover {text-decoration:none}
+.blind{display: none;overflow: hidden;position: absolute;width: 0;height: 0;padding: 0;margin: 0; font-size: 0;line-height: 0; text-indent: -9999em;visibility: hidden;outline: none;z-index: -1;}
+html,body{overflow:hidden;height:100%;}
+
+#set{
+  width: 100%;
+  height: 100%;
+}
+#wrap{
+  float: left;
+  width: 20%;
+  height: 100%;
+}
+#map{
+  float: right;
+  width: 100%;
+  height: 100%;
+  z-index:1
+}
+
+/* 메뉴 설정 */
+#wrap{width:100%; height:100%; padding-left:3px;}
+
+header {background:rgba(145, 15, 15, 0.8);box-shadow: 1px 1px 15px 1px rgb(212, 209, 209); z-index: 2;}
+#wrap header .logo_box{position:absolute; top:10px; cursor:default;}
+header .logo_box img{width:65px;height: 25px;}
+#wrap header{width:100px; height:100%; position:fixed; width: 65px; left:0px; top:0px; z-index:11;}
+#wrap header div{width:100%; height:100%;cursor: default;} 
+#wrap header div ul{ flex-direction:column; justify-content:center;}
+#wrap header ul ul{margin:100px 10px 0px 9px; position:relative;text-align: center;}
+#wrap header ul ul a{font-size : 25px; font-weight:600; line-height:10px;}
+#wrap header ul ul p{font-size:8pt; font-family: 'Noto Sans KR', sans-serif; font-weight:600; line-height:10px;color: #ffffff;}
+
+#wrap .menu1 {cursor: pointer;}
+#wrap .menu1 .hide{display: none;}
+#wrap .menu1 p:hover {color: rgb(255, 255, 0);}
+
+#wrap .menu2 {cursor: pointer;}
+#wrap .menu2 .hide{display: none;}
+#wrap .menu2 p:hover {color: rgb(255, 255, 0);}
+
+#wrap .menu3 {cursor: pointer;}
+#wrap .menu3 .hide{display: none;}
+#wrap .menu3 p:hover {color: rgb(255, 255, 0);}
+
+summary::marker 
+{ display: none; content: "";}
+
+#wrap .menu1_dateTime{
+  position: fixed;
+  top: 0px;
+  left: 65px;
+  width: 200px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.93);
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  bottom: 50px;
+  height: 100%;
+  margin-bottom: -70px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+  color: black;
+}
+#wrap .menu1_dateTime #date{
+  position: fixed;
+  top: 80px;
+  left: 65px;
+  width: 200px;
+  z-index: 15;
+  border: 3px solid rgb(74, 74, 9)
+}
+#wrap .menu1_dateTime #time{
+  position: fixed;
+  top: 143px;
+  left: 65px;
+  width: 200px;
+  z-index: 15;
+  border: 3px solid rgb(74, 74, 9)
+}
+#wrap .menu1_dateTime #submitId{
+  position: fixed;
+  top: 210px;
+  left: 135px;
+  width: 50px;
+  z-index: 15;
+  box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+  border-radius: 5px;
+  color:#000000;
+}
+#wrap .menu1_dateTime #submitId:hover{
+  position: fixed;
+  top: 210px;
+  left: 135px;
+  width: 50px;
+  z-index: 15;
+  box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+  border-radius: 5px;
+  background-color: rgba(211, 210, 210, 0.385);
+  cursor: pointer;
+}
+
+#wrap .menu3_dateTime{
+  position: fixed;
+  top: 0px;
+  left: 65px;
+  width: 200px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.93);
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  bottom: 50px;
+  height: 100%;
+  margin-bottom: -70px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
+  color: black;
+}
+#wrap .menu3_dateTime #ddate{
+  position: fixed;
+  top: 80px;
+  left: 65px;
+  width: 200px;
+  z-index: 15;
+  border: 3px solid rgb(74, 74, 9)
+}
+#wrap .menu3_dateTime #dtime{
+  position: fixed;
+  top: 143px;
+  left: 65px;
+  width: 200px;
+  z-index: 15;
+  border: 3px solid rgb(74, 74, 9)
+}
+#wrap .menu3_dateTime #submitd{
+  position: fixed;
+  top: 210px;
+  left: 135px;
+  width: 50px;
+  z-index: 15;
+}
+#wrap .menu3_dateTime a{
+  position:fixed;
+  top:210px;
+  left:65px;
+  width:200px;
+  z-index: 15;
+  font-size: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#wrap .menu3_dateTime a:link {
+  color : rgb(45, 38, 39);
+}
+#wrap .menu3_dateTime a:visited {
+  color : rgb(144, 82, 185);
+}
+#wrap .menu3_dateTime a:hover {
+  color : rgb(46, 136, 205);
+}
+#wrap .menu3_dateTime a:active {
+  color : rgb(234, 108, 124);
+}
+
+.sub_menu {
+  margin-top: 50px;
+}
