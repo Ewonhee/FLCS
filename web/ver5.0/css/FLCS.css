@@ -76,9 +76,8 @@ header .logo_box img{width:65px;height: 25px;}
 #wrap .menu2 .hide{display: none;}
 #wrap .menu2 p:hover {color: rgb(255, 255, 0);}
 
-#wrap .menu3 {cursor: pointer;}
-#wrap .menu3 .hide{display: none;}
-#wrap .menu3 p:hover {color: rgb(255, 255, 0);}
+#wrap .menu3 {cursor: default;}
+#wrap .menu3 p{color: rgb(255, 255, 255); font-weight: 1;}
 
 summary::marker 
 { display: none; content: "";}
@@ -137,7 +136,7 @@ summary::marker
   cursor: pointer;
 }
 
-#wrap .menu3_dateTime{
+#wrap .menu2_dateTime{
   position: fixed;
   top: 0px;
   left: 65px;
@@ -153,7 +152,7 @@ summary::marker
   box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
   color: black;
 }
-#wrap .menu3_dateTime #ddate{
+#wrap .menu2_dateTime #ddate{
   position: fixed;
   top: 80px;
   left: 65px;
@@ -161,7 +160,7 @@ summary::marker
   z-index: 15;
   border: 3px solid rgb(74, 74, 9)
 }
-#wrap .menu3_dateTime #dtime{
+#wrap .menu2_dateTime #dtime{
   position: fixed;
   top: 143px;
   left: 65px;
@@ -169,14 +168,14 @@ summary::marker
   z-index: 15;
   border: 3px solid rgb(74, 74, 9)
 }
-#wrap .menu3_dateTime #submitd{
+#wrap .menu2_dateTime #submitd{
   position: fixed;
   top: 210px;
   left: 135px;
   width: 50px;
   z-index: 15;
 }
-#wrap .menu3_dateTime a{
+#wrap .menu2_dateTime a{
   position:fixed;
   top:210px;
   left:65px;
@@ -186,16 +185,16 @@ summary::marker
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-#wrap .menu3_dateTime a:link {
+#wrap .menu2_dateTime a:link {
   color : rgb(45, 38, 39);
 }
-#wrap .menu3_dateTime a:visited {
+#wrap .menu2_dateTime a:visited {
   color : rgb(144, 82, 185);
 }
-#wrap .menu3_dateTime a:hover {
+#wrap .menu2_dateTime a:hover {
   color : rgb(46, 136, 205);
 }
-#wrap .menu3_dateTime a:active {
+#wrap .menu2_dateTime a:active {
   color : rgb(234, 108, 124);
 }
 
