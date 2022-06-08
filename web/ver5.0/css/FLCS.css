@@ -60,24 +60,24 @@ html,body{overflow:hidden;height:100%;}
 
 header {background:rgba(145, 15, 15, 0.8);box-shadow: 1px 1px 15px 1px rgb(212, 209, 209); z-index: 2;}
 #wrap header .logo_box{position:absolute; top:10px; cursor:default;}
-header .logo_box img{width:65px;height: 25px;}
+header .logo_box img{width:65px;height: 25px;opacity: 0.95;}
 #wrap header{width:100px; height:100%; position:fixed; width: 65px; left:0px; top:0px; z-index:11;}
 #wrap header div{width:100%; height:100%;cursor: default;} 
 #wrap header div ul{ flex-direction:column; justify-content:center;}
 #wrap header ul ul{margin:100px 10px 0px 9px; position:relative;text-align: center;}
 #wrap header ul ul a{font-size : 25px; font-weight:600; line-height:10px;}
-#wrap header ul ul p{font-size:8pt; font-family: 'Noto Sans KR', sans-serif; font-weight:600; line-height:10px;color: #ffffff;}
+#wrap header ul ul p{font-size:8pt; font-family: 'Noto Sans KR', sans-serif; font-weight:600; line-height:10px;color: rgba(255, 255, 255, 0.9);}
 
 #wrap .menu1 {cursor: pointer;}
 #wrap .menu1 .hide{display: none;}
-#wrap .menu1 p:hover {color: rgb(255, 255, 0);}
+#wrap .menu1 p:hover {color: rgba(255, 255, 0, 0.9);}
 
 #wrap .menu2 {cursor: pointer;}
 #wrap .menu2 .hide{display: none;}
-#wrap .menu2 p:hover {color: rgb(255, 255, 0);}
+#wrap .menu2 p:hover {color: rgba(255, 255, 0, 0.9);}
 
 #wrap .menu3 {cursor: default;}
-#wrap .menu3 p{color: rgb(255, 255, 255); font-weight: 1;}
+#wrap .menu3 p{color: rgba(255, 255, 255, 0.9); font-weight: 1;}
 
 summary::marker 
 { display: none; content: "";}
