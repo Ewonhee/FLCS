@@ -23,31 +23,6 @@ try:
 except:
     result.append('J1_VIIRS_C2_file_error\n')
 
-
-SFB_Url = 'https://map.forest.go.kr/ffas/gis/selectFireBoard.do'
-try:
-    SFB_file = requests.get(SFB_Url, allow_redirects=True)
-    open(timeStamp+'selectFireBoard.html', 'wb').write(SFB_file.content)
-except:
-    result.append('SFB_file_error\n')
-
-
-SFSL_Url = 'https://map.forest.go.kr/ffas/gis/selectFireShowList.do'        
-try:
-    SFSL_file = requests.get(SFSL_Url, allow_redirects=True)
-    open(timeStamp+'selectFireShowList.html', 'wb').write(SFSL_file.content)
-except:
-    result.append('SFSL_file_error\n')
-
-    
-SFWDL_Url = 'https://map.forest.go.kr/ffas/firecontrol/selectFireWarningDisplayList.do'        
-try:
-    SFWDL_file = requests.get(SFWDL_Url, allow_redirects=True)
-    open(timeStamp+'selectFireWarningDisplayList.html', 'wb').write(SFWDL_file.content)
-except:
-    result.append('SFWDL_file_error\n')
-
-
 if(result!=''):
     open(timeStamp+'errorlog.txt','w').write(result)
 
