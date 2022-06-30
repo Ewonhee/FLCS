@@ -1,36 +1,40 @@
+#시스템, 구동관련
 import os
 import glob
 import concurrent.futures
 from multiprocessing import freeze_support
 import gc
+#분석관련
 from bs4 import BeautifulSoup as bs
 import pandas as pd
-import geopandas as gpd
 import numpy as np
 import scipy.spatial as sp
 from sklearn.cluster import DBSCAN
 import json
-import pymysql
 import matplotlib.pyplot as plt
+#GIS관련
+import geopandas as gpd
 import getFcst
 from shapely.geometry import Polygon
+#SQL
+import pymysql
+
 #KML파일분석기 
 #최상위디렉터리에서 수행되어야함
 #######################################
 # T  O  D  O   L  I  S  T #
-    #GeoJSON_cvtr:JSON모듈활용해 개량할것 (0509)
-    #동수형 코드 수정될시 보수작업
+    #릴리즈
 # N  O  T  E   L  I  S  T #    
-    #GeoJSON_cvtr: concurrnt.futures로 병렬처리 오류발생(실사용시 문제 없음)
+    #GeoJSON_cvtr: concurrnt.futures로 병렬처리 오류발생(원인 파악 불가, 실사용시 문제 없음)
 #######################################
 # P  A  N  E  L #
-d=0.1                                                                                           #d-value
+d=0.18                                                                                           #d-value
 base="data"                                                                                    #베이스 폴더 지정[test, data]
 mp=True                                                                                       #멀티프로세싱 사용여부
 fig_evidence=False                                                                         #증거용플롯저장
 db_host='localhost'                                                                        #DB호스트
 db_user='root'                                                                                #DB유저
-db_pw='1234'                                                                                 #DBPW
+db_pw=''                                                                                 #DBPW
 db_name='flcsdb'                                                                            #DB명
 TBLname='crdnttable'                                                                    #테이블명
 gdfloc='data/korea_forest_map.shp'                                               #셰이프파일 위치
@@ -107,8 +111,7 @@ def GeoJSON_cvtr(file,fig):
                         for i in hull.vertices:
                             li.append([hull.points[i,0],hull.points[i,1]])
                         li.append(li[0])
-                        print(Polygon(li).area)###############################산불의 규모 구할 수 있음
-                        ######근?데 단위를 모름 근?데 일단 넣음
+                        print(Polygon(li).area)
                         prop_addr,prop_wdir,prop_wspd=getFcst.cord(Polygon(li).centroid)                        
                         prop={"Description":( 
                         "<div style='font-family: gothic, arial, sans-serif;font-size: 15px; font-weight: bold; color:red; margin-bottom: 5px;'>"+str(prop_addr) +"</div><hr/>"+
@@ -149,7 +152,7 @@ def DB_insert(file_name):
             contents = file.read()
             json_data = json.loads(contents)
         try:
-            # 접속 정보 설정 pw는 임의로 설정됨
+            # 접속 정보 설정 
             conn = pymysql.connect(host=db_host, user=db_user, password=db_pw, db=db_name, charset='utf8')
             curs = conn.cursor()
         except:
@@ -182,10 +185,7 @@ if __name__=='__main__':
 #    #data/kml/*.kml -> data/kml_csv_kor_only/*.csv
     with concurrent.futures.ProcessPoolExecutor() as executor:
         imported_files = glob.glob(base+"/kml/*.kml")
-        if mp==False:
-            map(CSV_cvtr, imported_files)
-        else:    
-            executor.map(CSV_cvtr, imported_files)    
+        executor.map(CSV_cvtr, imported_files)    
     print('CSV_cvtr Done')
     
     #데이터 필터링 처리해서 WGS84좌표로 GeoJSON 변환
@@ -201,19 +201,13 @@ if __name__=='__main__':
     #data/geojson/WGS84/*.geojson -> data/geojson/UTMK/*.geojson
     with concurrent.futures.ProcessPoolExecutor() as executor:
         imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
-        if mp==False:
-            map(EPSG_cvtr, imported_files)
-        else:    
-            executor.map(EPSG_cvtr, imported_files)
+        executor.map(EPSG_cvtr, imported_files)
     print('EPSG_cvtr Done')
-#    
+        
 #    #DB에 자료 삽입
 #    #data/geojson/WGS84/*.geojson -> DataBase    
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')
-        if mp==False:
-            map(DB_insert, imported_files)
-        else:    
-            executor.map(DB_insert, imported_files)
+        imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')    
+        executor.map(DB_insert, imported_files)
     print('DB_insert Done')    
 ######################################            
