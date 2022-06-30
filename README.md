@@ -4,7 +4,7 @@
 
 ## Introduction Video : [Full](https://youtu.be/i0T7D0HggxE), [Short](https://youtu.be/r57d8KcvtAg)
 
-## Introduction Presentation : 
+## Introduction Presentation : [Link](https://github.com/Ewonhee/FLCS/blob/main/etc/%EB%B3%B4%EC%B6%A9%EC%84%A4%EB%AA%85%EC%9E%90%EB%A3%8C_%EC%A0%84%EC%B2%B4.pdf)
 
 <br>
 
