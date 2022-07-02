@@ -1,6 +1,6 @@
 # About us.
 
-## Link : [FLCS_Demo](https://github.com/Ewonhee/FLCS)
+## Link : [FLCS_Demo](http://14.54.11.248:8080/FLCS/FLCS_Main.jsp)
 
 ## Introduction Video : [Full](https://youtu.be/i0T7D0HggxE), [Short](https://youtu.be/r57d8KcvtAg)
 
