@@ -6,6 +6,7 @@
 
 ## Introduction Presentation : [Link](https://github.com/Ewonhee/FLCS/blob/main/etc/%EB%B3%B4%EC%B6%A9%EC%84%A4%EB%AA%85%EC%9E%90%EB%A3%8C_%EC%A0%84%EC%B2%B4.pdf)
 
+## Data Validation : [Link](https://github.com/Ewonhee/FLCS/blob/main/etc/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B2%80%EC%A6%9D.pdf)
 <br>
 
 # FLCS Development Environment
