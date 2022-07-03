@@ -19,3 +19,7 @@
 |IDE|Eclipse IDE for Enterprise Java and Web Developers(2021-12, 4.22.0)|
 |IDE|Visual Studio Code (Always newest version)|
 |VCS|GitHub(SourceTree 3.4.8, Fork1.74.1.0)|
+
+# License
+
+This project is licensed under the terms of the MIT license.
