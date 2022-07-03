@@ -4,6 +4,7 @@ import googlemaps
 import datetime
 import requests
 import warnings
+
 warnings.filterwarnings('ignore')
 ##https://velog.io/@chaeri93/Django-%EA%B8%B0%EC%83%81%EC%B2%AD-%EB%8B%A8%EA%B8%B0%EC%98%88%EB%B3%B4-API-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0
 NX = 149            ## X축 격자점 수
