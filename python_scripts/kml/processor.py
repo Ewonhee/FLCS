@@ -28,7 +28,7 @@ import pymysql
     #GeoJSON_cvtr: concurrnt.futures로 병렬처리 오류발생(원인 파악 불가, 실사용시 문제 없음)
 #######################################
 # P  A  N  E  L #
-d=0.18                                                                                           #d-value
+d=0.1                                                                                           #d-value
 base="data"                                                                                    #베이스 폴더 지정[test, data]
 mp=True                                                                                       #멀티프로세싱 사용여부
 fig_evidence=False                                                                         #증거용플롯저장
@@ -39,6 +39,7 @@ db_name='flcsdb'                                                                
 TBLname='crdnttable'                                                                    #테이블명
 gdfloc='data/korea_forest_map.shp'                                               #셰이프파일 위치
 conn,curs,insert_time=None,None,None                                        #DB용 전역변수 (시험용도외 건들지말것
+SQLinsertMode=False
 #######################################
 def Dup_pass(file):
     if os.path.isfile(file):
@@ -75,6 +76,8 @@ def CSV_cvtr(file):
 
 #_______________________________________________________________________________  
 def GeoJSON_cvtr(file,fig):
+    CvtrerrorLog=[]
+    CvtrerrorLog.append('----------------------------------')
     addr=str(base+'/geojson/WGS84/'+str(file.split('/')[1].split('\\')[1][:-4]))
     global gdf
     if Dup_pass(addr+'.geojson')==False:
@@ -92,7 +95,7 @@ def GeoJSON_cvtr(file,fig):
             dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_
             df_joined_points=df_joined_points.assign(cluID=dbs)
         except:
-            print(str(file)+"DBSCAN경고: smaple이 minsamples보다 작습니다. 비어있는 GeoJSON파일을 생성합니다")
+            CvtrerrorLog.append((str(file)+"DBSCANwaring: smaple is smaller than minsamples.  Create empty GeoJSON file\n"))
             fets.append('{"type": "Point","coordinates": [0, 0]}')
         else:    
             dbs=DBSCAN(eps=d,min_samples=3).fit(df_joined_points[['x','y']]).labels_        
@@ -129,11 +132,16 @@ def GeoJSON_cvtr(file,fig):
                 plt.savefig(addr+'.jpg')
                 plt.close()
         finally:
+            
             dic={"type": "FeatureCollection","features":fets}
             f=open(addr+'.geojson', 'w', encoding='UTF-8-sig')
             f.write(json.dumps(dic, ensure_ascii=False))
             f.close()
             gc.collect(generation=2)
+    g=open(base+'/errLog.txt','a', encoding='UTF-8-sig')
+    g.write(str(''.join(CvtrerrorLog)))
+    g.close()
+                
 #_______________________________________________________________________________  
 def EPSG_cvtr(file):
     if Dup_pass(base+'/geojson/UTMK/'+str(file.split('/')[2].split('\\')[1].split('.')[0])+'UTMK.geojson')==False:
@@ -204,10 +212,11 @@ if __name__=='__main__':
         executor.map(EPSG_cvtr, imported_files)
     print('EPSG_cvtr Done')
         
-#    #DB에 자료 삽입
-#    #data/geojson/WGS84/*.geojson -> DataBase    
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')    
-        executor.map(DB_insert, imported_files)
-    print('DB_insert Done')    
+    #모드 활성화시 DB에 자료 삽입
+    #data/geojson/WGS84/*.geojson -> DataBase    
+if SQLinsertMode==True:
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            imported_files = glob.glob(base+'/geojson/WGS84/*.geojson')    
+            executor.map(DB_insert, imported_files)
+        print('DB_insert Done')    
 ######################################            
