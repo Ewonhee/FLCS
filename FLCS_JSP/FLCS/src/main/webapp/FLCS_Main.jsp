@@ -63,14 +63,13 @@ try {
 	for (int i = 0; i < Integer.parseInt(num_data); i++) {
 		rs1.next();
 		String temp = rs1.getString("Properties");
-		String[] temparr = temp.split("<br>");
+/* 		String[] temparr = temp.split("<br>");
 		String addr = temparr[0].substring(0, temparr[0].length() - 10);
 		String[] temparr2 = temparr[1].split(", ");
 		String wind_dir = temparr2[0].substring(temparr2[0].length() - 2, temparr2[0].length());
-		String wind_speed = temparr2[1].substring(temparr2[1].length() - 3, temparr2[1].length());
+		String wind_speed = temparr2[1].substring(temparr2[1].length() - 3, temparr2[1].length()); */
 		String temp2 = rs1.getString("Coordinates");
-		sb1.append("{ \"type\": \"Feature\", \"properties\": { \"Description\": \"" + addr_div1 + addr + addr_div2
-		+ "풍향" + addr_div3 + wind_dir + addr_div4 + "풍속" + addr_div5 + wind_speed + "m/s" + addr_div6 + "\"},");
+		sb1.append("{ \"type\": \"Feature\", \"properties\": { \"Description\": \"" + temp + "\"},");
 		sb1.append("\"geometry\": { \"type\": \"Polygon\", \"coordinates\": " + temp2 + "} },");
 	}
 } catch (SQLException ex) {
@@ -141,7 +140,7 @@ try {
 							<div class="menu2_dateTime">
 								<div id="form">
 									<p>
-										<input id="ddate" type="date" min="2022-03-30" max="2022-05-07" required onchange="handler(event)">
+										<input id="ddate" type="date" min="2022-03-30" max="2022-05-07" required>
 									</p>
 									<select name="time" id="dtime">
 										<option value="0">-- 시간 --</option>
@@ -187,8 +186,21 @@ try {
   var ddate = document.querySelector("#ddate").value;
   var dtime = document.querySelector("#dtime").value;
   var [year, mmonth, date] = ddate.split('-');
-  var month=parseInt(mmonth);
-  month=String(month);
+  var month;
+  if(mmonth.startsWith('0')){
+	  month = parseInt(mmonth.substring(0,2));
+  }
+  else{
+	  month=parseInt(mmonth);
+  }
+  if(date.startsWith('0')){
+	  date = parseInt(date.substring(0,2));
+  }
+  else{
+	  date=parseInt(date);
+  }
+/*   var month=parseInt(mmonth); */
+   month=String(month);
 
    document.getElementById('pt').setAttribute("download", ddate+"-"+dtime);
    document.getElementById('pt').setAttribute("href", "./data/"+year+"_"+month+"_"+date+"-"+dtime+"_SUOMI_VIIRS_C2result_koreaUTMK.geojson");
